@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Validador de Facturas — SUNAT</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <span class="logo">⬛ FacturaCheck</span>
+      <span class="subtitle">POC Arquitectura de Software</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="card upload-card">
+      <h2>Subir Factura PDF</h2>
+      <form id="uploadForm">
+        <div class="drop-zone" id="dropZone">
+          <input type="file" id="pdfInput" accept=".pdf" hidden />
+          <div class="drop-icon">📄</div>
+          <p>Arrastra tu PDF aquí o <span class="link" id="browseBtn">elige un archivo</span></p>
+          <p class="file-name" id="fileName"></p>
+        </div>
+        <button type="submit" id="submitBtn" disabled>Enviar y Validar</button>
+      </form>
+    </section>
+
+    <section class="card result-card" id="resultCard" hidden>
+      <h2>Resultado SUNAT</h2>
+      <div class="badge validado" id="estadoBadge"></div>
+      <p id="mensajeSunat"></p>
+      <div class="datos-extraidos" id="datosExtraidos"></div>
+    </section>
+
+    <section class="card table-card">
+      <div class="table-header">
+        <h2>Facturas Registradas</h2>
+        <button id="refreshBtn">↻ Actualizar</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Factura</th>
+              <th>Emisor</th>
+              <th>Monto</th>
+              <th>Estado</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody id="facturasTbody">
+            <tr><td colspan="5" class="empty">No hay facturas registradas aún.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
