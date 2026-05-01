@@ -84,7 +84,7 @@ function mostrarError(msg) {
 }
 
 function mostrarResultado({ datos, validacion, mensaje }) {
-  estadoBadge.className = 'badge validado';
+  estadoBadge.className = validacion === 'rechazado' ? 'badge error' : 'badge validado';
   estadoBadge.textContent = validacion;
   mensajeSunat.textContent = mensaje;
 
@@ -142,7 +142,7 @@ async function cargarFacturas() {
         <td>${f.fecha_vencimiento}</td>
         <td>${f.tipo_moneda}</td>
         <td>${f.monto_neto}</td>
-        <td><span class="status-pill">${f.validacion}</span></td>
+        <td><span class="status-pill ${f.validacion === 'rechazado' ? 'status-rechazado' : ''}">${f.validacion}</span></td>
       </tr>
     `).join('');
   } catch {
