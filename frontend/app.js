@@ -90,16 +90,32 @@ function mostrarResultado({ datos, validacion, mensaje }) {
 
   datosExtraidos.innerHTML = `
     <div class="dato-item">
-      <div class="dato-label">ID Factura</div>
-      <div class="dato-valor">${datos.id}</div>
+      <div class="dato-label">RUC Emisor</div>
+      <div class="dato-valor">${datos.ruc_emisor}</div>
     </div>
     <div class="dato-item">
-      <div class="dato-label">Monto</div>
-      <div class="dato-valor">S/ ${datos.monto}</div>
+      <div class="dato-label">RUC Factura</div>
+      <div class="dato-valor">${datos.ruc_factura}</div>
     </div>
     <div class="dato-item">
-      <div class="dato-label">Emisor</div>
-      <div class="dato-valor">${datos.emisor}</div>
+      <div class="dato-label">Razón Social</div>
+      <div class="dato-valor">${datos.razon_social}</div>
+    </div>
+    <div class="dato-item">
+      <div class="dato-label">Fecha Emisión</div>
+      <div class="dato-valor">${datos.fecha_emision}</div>
+    </div>
+    <div class="dato-item">
+      <div class="dato-label">Fecha Vencimiento</div>
+      <div class="dato-valor">${datos.fecha_vencimiento}</div>
+    </div>
+    <div class="dato-item">
+      <div class="dato-label">Moneda</div>
+      <div class="dato-valor">${datos.tipo_moneda}</div>
+    </div>
+    <div class="dato-item">
+      <div class="dato-label">Monto Neto</div>
+      <div class="dato-valor">${datos.monto_neto}</div>
     </div>
   `;
 
@@ -113,17 +129,20 @@ async function cargarFacturas() {
     const facturas = await res.json();
 
     if (!facturas.length) {
-      facturasTbody.innerHTML = `<tr><td colspan="5" class="empty">No hay facturas registradas aún.</td></tr>`;
+      facturasTbody.innerHTML = `<tr><td colspan="8" class="empty">No hay facturas registradas aún.</td></tr>`;
       return;
     }
 
     facturasTbody.innerHTML = facturas.map(f => `
       <tr>
-        <td>${f.id}</td>
-        <td>${f.emisor}</td>
-        <td>S/ ${f.monto}</td>
+        <td>${f.ruc_factura}</td>
+        <td>${f.ruc_emisor}</td>
+        <td>${f.razon_social}</td>
+        <td>${f.fecha_emision}</td>
+        <td>${f.fecha_vencimiento}</td>
+        <td>${f.tipo_moneda}</td>
+        <td>${f.monto_neto}</td>
         <td><span class="status-pill">${f.validacion}</span></td>
-        <td>${new Date(f.fechaSubida).toLocaleString('es-PE')}</td>
       </tr>
     `).join('');
   } catch {
